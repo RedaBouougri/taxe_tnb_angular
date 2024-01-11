@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+					<label id="te" for="chk" aria-hidden="true">Sign up</label>
+                   
+                    <input type="text" name="txt2" placeholder="fullName" formControlName="lastName" required>
+                    <input type="text" name="txt3" placeholder="cin" formControlName="cin" required>
+					<input type="email" name="email" placeholder="Email" formControlName="email" required>
+                    <input type="text" name="txt4" placeholder="Username" formControlName="username" required>
+					<input type="password" name="pswd" placeholder="Password" formControlName="password" required>
+					<button type="submit" >Sign up</button>
+                    <div *ngIf="!isValid" class="error-message">
+                              Bad credentials.
+                      </div>
+				</form>
+			</div>
+
+			<div class="login">
+				<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="text" name="username" placeholder="Username" formControlName="username" required>
+					<input type="password" name="pswd" placeholder="Password" formControlName="password" required>
+					<button type="submit"  >Login</button>
+                    <div *ngIf="loginForm.invalid && loginForm.touched" class="error-message">
+                        Bad credentials.
+                      </div>
+				</form>
+			</div>
+	</div>
+</body>
+</html>
