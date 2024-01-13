@@ -37,9 +37,9 @@ label{
 	transition: .5s ease-in-out;
 }
 
-input{
+.in{
 	width: 60%;
-	height: 20px;
+	height: 30px;
 	background: #e0dede;
 	justify-content: center;
 	display: flex;
@@ -93,6 +93,12 @@ button:hover{
 
 .error-message {
     color: red;
+    margin-top: 5px;
+    margin-left: 40px; /* Add margin to separate from the button */
+  }
+
+  .green-message {
+    color: rgb(10, 248, 78);
     margin-top: 5px;
     margin-left: 40px; /* Add margin to separate from the button */
   }

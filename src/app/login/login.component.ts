@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
- // Adjust the path based on your project structure
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-login',
@@ -11,16 +11,18 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent {
 
   isValid: Boolean;
+  successRegistre;
   signUpForm: FormGroup;
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService,private router : Router) {
     this.isValid=true;
+    this.successRegistre=false;
     this.signUpForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-     
+      firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       cin: ['', Validators.required]
     });
@@ -38,6 +40,7 @@ export class LoginComponent {
         (response) => {
           // Handle successful sign-up
           console.log('Sign-up successful:', response);
+          this.successRegistre=true;
         },
         (error) => {
           // Handle sign-up error
@@ -49,23 +52,30 @@ export class LoginComponent {
     }
   }
 
+  loginFailed: boolean = false;
+
+
   login() {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       this.authService.signIn(username, password).subscribe(
         (response) => {
-          // Handle successful login
           console.log('Login successful:', response);
+          this.router.navigate(['/terrain']);
         },
         (error) => {
-          // Handle login error
           console.error('Login error:', error);
+          if (error.status === 401) {
+            // Set a flag to indicate login failure
+            this.isValid = false;
+          }
         }
       );
     } else {
-      this.isValid=false
+      this.isValid = false;
     }
   }
+  
 
   
 }

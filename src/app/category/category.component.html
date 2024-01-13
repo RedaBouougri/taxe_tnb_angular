@@ -1,0 +1,89 @@
+<div class="container mt-3">
+    <h2 class="text-center">List of Terrains</h2>
+    
+    <button class="btn btn-primary mt-3" (click)="openAddCategoryModal()">Add Category</button>
+
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Label</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.label }}</td>
+          <td>{{ category.description }}</td>
+          
+          <td>
+            <button class="btn btn-danger" (click)="deleteCategory(category?.id)" ><i class="fafa-trash"></i> Delete</button>
+            <button class="btn btn-primary" (click)="openUpdateCategoryModal(category)">
+                <i class="fafa-pencil"></i> Update
+              </button>
+          </td>
+         
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showAddCategoryModal, 'd-block': showAddCategoryModal}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Terrain</h5>
+              <button type="button" class="close" (click)="openAddCategoryModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (submit)="addCategory()">
+                <div class="form-group">
+                  <label for="nom">Nom:</label>
+                  <input type="text" class="form-control" id="nom" [(ngModel)]="newCategory.label" name="nom" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <textarea class="form-control" id="description" [(ngModel)]="newCategory.description" name="description" required></textarea>
+                </div>
+      
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="closeAddCategoryModal()">Close</button>
+                  <button type="submit" class="btn btn-primary">Add Terrain</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showUpdateCategoryModal, 'd-block': showUpdateCategoryModal}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Update Terrain</h5>
+              <button type="button" class="close" (click)="closeUpdateCategoryModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (submit)="updateCategory()">
+                <div class="form-group">
+                  <label for="updateNom">Nom:</label>
+                  <input type="text" class="form-control" id="updateNom" [(ngModel)]="selectedCategory.label" name="updateNom" required>
+                </div>
+                <div class="form-group">
+                  <label for="updateDescription">Description:</label>
+                  <textarea class="form-control" id="updateDescription" [(ngModel)]="selectedCategory.description" name="updateDescription" required></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="closeUpdateCategoryModal()">Close</button>
+                  <button type="submit" class="btn btn-primary">Update Terrain</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

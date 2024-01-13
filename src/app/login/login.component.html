@@ -9,27 +9,34 @@
 				<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
 					<label id="te" for="chk" aria-hidden="true">Sign up</label>
                    
-                    <input type="text" name="txt2" placeholder="fullName" formControlName="lastName" required>
-                    <input type="text" name="txt3" placeholder="cin" formControlName="cin" required>
-					<input type="email" name="email" placeholder="Email" formControlName="email" required>
-                    <input type="text" name="txt4" placeholder="Username" formControlName="username" required>
-					<input type="password" name="pswd" placeholder="Password" formControlName="password" required>
+					<input class="in" type="text" name="txt1" placeholder="firstName" formControlName="firstName" required>
+                    <input class="in" type="text" name="txt2" placeholder="lastName" formControlName="lastName" required>
+                    <input class="in" type="text" name="txt3" placeholder="cin" formControlName="cin" required>
+					<input class="in" type="email" name="email" placeholder="Email" formControlName="email" required>
+                    <input class="in" type="text" name="txt4" placeholder="Username" formControlName="username" required>
+					<input class="in" type="password" name="pswd" placeholder="Password" formControlName="password" required>
 					<button type="submit" >Sign up</button>
                     <div *ngIf="!isValid" class="error-message">
                               Bad credentials.
                       </div>
+					  <div *ngIf="loginFailed" class="error-message">
+						Bad credentials. Please try again.
+					  </div>
+                      <div *ngIf="successRegistre" class="green-message">
+                        User Registred.
+                </div>
 				</form>
 			</div>
 
 			<div class="login">
 				<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
 					<label for="chk" aria-hidden="true">Login</label>
-					<input type="text" name="username" placeholder="Username" formControlName="username" required>
-					<input type="password" name="pswd" placeholder="Password" formControlName="password" required>
+					<input class="in" type="text" name="username" placeholder="Username" formControlName="username" required>
+					<input class="in" type="password" name="pswd" placeholder="Password" formControlName="password" required>
 					<button type="submit"  >Login</button>
-                    <div *ngIf="loginForm.invalid && loginForm.touched" class="error-message">
+                    <div *ngIf="!isValid" class="error-message">
                         Bad credentials.
-                      </div>
+                     </div>
 				</form>
 			</div>
 	</div>
