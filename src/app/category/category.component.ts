@@ -45,6 +45,19 @@ export class CategoryComponent implements OnInit {
     this.showUpdateCategoryModal = false;
   }
 
+  updateCategory(): void {
+    this.categoryService.updateCategory(this.selectedCategory).subscribe(
+      () => {
+        console.log('Category updated successfully.');
+        this.loadCategories();
+        this.closeUpdateCategoryModal();
+      },
+      (error) => {
+        console.error('Error updating category:', error);
+      }
+    );
+  }
+
   loadCategories(): void {
     this.categoryService.getCategories().subscribe(
       (data) => {
