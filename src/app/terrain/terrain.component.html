@@ -1,19 +1,53 @@
-<div class="container mt-3">
-    <h2 class="text-center">List of Terrains</h2>
-    
-    <button class="btn btn-primary mt-3" (click)="openAddTerrainModal()">Add Terrain</button>
-  
+<div class="container mt-3 text-center">
+  <style>
+    .custom-title {
+      font-family: 'Arial', sans-serif;
+      font-size: 30px;
+      font-weight: bold;
+      color: #0015ff;
+      text-align: center;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      padding-top: 50px;
+    }
+
+    .custom-body {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      color: #333; 
+      text-align: center;
+    }
+
+    .professional-thead {
+      background-color: #006edd; 
+      border-bottom: 2px solid #dee2e6; 
+    }
+
+    .professional-th {
+      padding: 15px; 
+      text-align: center;
+      background-color: #7883fc;
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: bold; 
+    }
+  </style>
+
+  <h2 class="custom-title">List of Terrains</h2>
+
+  <div class="custom-body">
     <table class="table">
-      <thead>
+      <thead class="professional-thead">
         <tr>
-          <th scope="col">Nom</th>
-          <th scope="col">Surface</th>
-          <th scope="col">Description</th>
-          <th scope="col">Redevable</th>
-          <th scope="col">Category</th>
-          <th scope="col">Actions</th>
+          <th scope="col" class="professional-th">Nom</th>
+          <th scope="col" class="professional-th">Surface</th>
+          <th scope="col" class="professional-th">Description</th>
+          <th scope="col" class="professional-th">Redevable</th>
+          <th scope="col" class="professional-th">Category</th>
+          <th scope="col" class="professional-th">Actions</th>
         </tr>
       </thead>
+
       <tbody>
         <tr *ngFor="let terrain of terrains">
           <td>{{ terrain.nom }}</td>
@@ -21,16 +55,21 @@
           <td>{{ terrain.description }}</td>
           <td>{{ terrain.redevable?.prenom }}</td>
           <td>{{ terrain.category?.label }}</td>
+          
           <td>
-            <button class="btn btn-danger" (click)="deleteTerrain(terrain)"><i class="fafa-trash"></i> Delete</button>
             <button class="btn btn-primary" (click)="openUpdateTerrainModal(terrain)">
-              <i class="fafa-pencil"></i> Update
+              <i class="fas fa-pencil"></i> Update
             </button>
-          </td>
-         
+            <button class="btn btn-danger" (click)="deleteTerrain(terrain)"><i class="fas fa-trash"></i> Delete</button>
+            </td>
         </tr>
       </tbody>
     </table>
+
+    <div class="container mt-3 text-center">
+      <button class="btn btn-primary" (click)="openAddTerrainModal()">Add Terrain</button>
+    </div>
+  </div>
   
     <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showAddTerrainModal, 'd-block': showAddTerrainModal}">
         <div class="modal-dialog" role="document">
