@@ -1,0 +1,67 @@
+<div class="container mt-3">
+    <h2 class="text-center">List of Redevables</h2>
+    
+
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Prenom</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Cin</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let redevable of redevables">
+          <td>{{ redevable.prenom }}</td>
+          <td>{{ redevable.nom }}</td>
+          <td>{{ redevable.cin }}</td>
+
+          
+          <td>
+            <button class="btn btn-danger" (click)="deleteRedevable(redevable.id)"  > Delete</button>
+            <button class="btn btn-primary" (click)="openUpdateRedevableModal(redevable)">
+                <i class="fafa-pencil"></i> Update
+              </button>
+          </td>
+          
+         
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showAddRedevableModal, 'd-block': showAddRedevableModal}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Update Terrain</h5>
+              <button type="button" class="close" (click)="closeUpdateRedevableModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (submit)="updateRedevable()">
+                <div class="form-group">
+                  <label for="nom">Prenom:</label>
+                  <input type="text" class="form-control" id="nom" [(ngModel)]="newRedevable.prenom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom:</label>
+                    <input type="text" class="form-control" id="nom" [(ngModel)]="newRedevable.nom" name="nom" required>
+                  </div>
+                <div class="form-group">
+                  <label for="description">Cin:</label>
+                  <textarea class="form-control" id="description" [(ngModel)]="newRedevable.cin" name="description" required></textarea>
+                </div>
+                
+      
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="closeUpdateRedevableModal()">Close</button>
+                  <button type="submit" class="btn btn-primary">Update Redevable</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

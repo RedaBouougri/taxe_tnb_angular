@@ -37,7 +37,7 @@ export class CategoryComponent implements OnInit {
   }
 
   openUpdateCategoryModal(category: Category): void {
-    this.selectedCategory = { ...category }; // Create a copy to avoid two-way binding issues
+    this.selectedCategory = { ...category }; 
     this.showUpdateCategoryModal = true;
   }
 

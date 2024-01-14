@@ -1,6 +1,6 @@
 export class Redevable {
 
-    id!:number;
+    id?:number;
     nom!:String;
     prenom!:String;
     cin!:String;

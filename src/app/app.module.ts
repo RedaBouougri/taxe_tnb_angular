@@ -13,6 +13,8 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CategoryComponent } from './category/category.component';
+import { RedevableComponent } from './redevable/redevable.component';
+import { TauxComponent } from './taux/taux.component';
 
 
 
@@ -23,6 +25,8 @@ import { CategoryComponent } from './category/category.component';
     HeaderComponent,
     TerrainComponent,
     CategoryComponent,
+    RedevableComponent,
+    TauxComponent,
     
   ],
   imports: [
