@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Taux } from '../models/taux';
-import { TauxService } from '../services/taux.service'; // Adjust the path based on your actual service location
+import { TauxService } from '../services/taux.service'; 
 import { Observable } from 'rxjs';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';

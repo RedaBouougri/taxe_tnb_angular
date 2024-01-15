@@ -8,7 +8,7 @@ import { Taux } from '../models/taux';
 })
 export class TauxService {
 
-  private apiUrl = 'http://localhost:8050/api/taux'; // Adjust the API URL based on your server
+  private apiUrl = 'http://localhost:8050/api/taux'; 
 
   constructor(private http: HttpClient) { }
 

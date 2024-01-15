@@ -6,6 +6,9 @@ import { Category } from '../models/category';
 import { Redevable } from '../models/redevable';
 import { RedevableService } from '../services/redevable.service';
 import { CategoryService } from '../services/category.service';
+import { TauxService } from '../services/taux.service';
+import { Taux } from '../models/taux';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -16,6 +19,7 @@ import { CategoryService } from '../services/category.service';
 export class TerrainComponent {
 
   terrains!: Terrain[];
+  ltaux: Taux[] = [];
   categories: Category[]=[];
   redevables:Redevable[]=[];
   newTerrain: Terrain = {
@@ -32,7 +36,7 @@ export class TerrainComponent {
   showUpdateTerrainModal: boolean = false;
 
 
-  constructor(private terrainService: TerrainService,private redevableService :RedevableService,private categoryService:CategoryService) { }
+  constructor(public authService:AuthService ,private tauxService: TauxService,private terrainService: TerrainService,private redevableService :RedevableService,private categoryService:CategoryService) { }
 
   ngOnInit() {
     this.getTerrains();
@@ -62,17 +66,46 @@ export class TerrainComponent {
    
   }
 
-
-  getTerrains() {
-    this.terrainService.getTerrains().subscribe(
+  getTauxList(): void {
+    this.tauxService.getTauxList().subscribe(
       (data) => {
-        this.terrains = data;
+        this.ltaux = data;
+        console.log('Taux List:', this.ltaux);
       },
       (error) => {
-        console.error('Error fetching terrains:', error);
+        console.error('Error fetching Taux list:', error);
       }
     );
   }
+
+
+  getTerrains() {
+    if (this.authService.hasAdminRole()) {
+      this.terrainService.getTerrains().subscribe(
+        (data) => {
+          this.terrains = data;
+        },
+        (error) => {
+          console.error('Error fetching terrains:', error);
+        }
+      );
+    } else {
+      const userCin = localStorage.getItem('cin');
+      if (userCin) {
+        this.terrainService.getRedTerrains(userCin).subscribe(
+          (data) => {
+            this.terrains = data;
+          },
+          (error) => {
+            console.error('Error fetching red terrains:', error);
+          }
+        );
+      } else {
+        console.error('User Cin not found in localStorage');
+      }
+    }
+  }
+  
 
   getCategories() {
     this.categoryService.getCategories().subscribe(
@@ -99,16 +132,34 @@ export class TerrainComponent {
 
 
   addTerrain(): void {
-    this.terrainService.addTerrain(this.newTerrain).subscribe(
-      (addedTerrain) => {
-        this.getTerrains();
-        this.closeAddTerrainModal();
-      },
-      (error) => {
-        console.error('Error adding terrain:', error);
-      }
-    );
+    if (this.authService.hasAdminRole()) {
+      this.terrainService.addTerrain(this.newTerrain).subscribe(
+        (addedTerrain) => {
+          this.getTerrains();
+          this.closeAddTerrainModal();
+        },
+        (error) => {
+          console.error('Error adding terrain:', error);
+        }
+      );
+    } else {
+      const userCin = localStorage.getItem('cin');
+      if (userCin) {
+      this.terrainService.addTerrain2(this.newTerrain,userCin).subscribe(
+        (addedTerrain) => {
+          this.getTerrains();
+          this.closeAddTerrainModal();
+        },
+        (error) => {
+          console.error('Error adding terrain2:', error);
+        }
+      );
+    } else {
+      console.error('User Cin not found in localStorage');
+    }
+    }
   }
+  
 
   deleteTerrain(terrain: Terrain) {
     this.terrainService.deleteTerrain(terrain.id).subscribe(

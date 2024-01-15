@@ -25,12 +25,20 @@ export class AuthService {
         localStorage.setItem('token', response.accessToken);
         localStorage.setItem('userId', response.id);
         localStorage.setItem('username', response.username);
+        localStorage.setItem('cin', response.cin);
+        localStorage.setItem("user", JSON.stringify(response));
+        console.log(response.roles);
       })
     );
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  hasAdminRole(): boolean {
+    const userRoles: string[] = JSON.parse(localStorage.getItem("user") || "").roles || [];
+    return userRoles.includes("ROLE_ADMIN");
   }
 
   signOut(): void {

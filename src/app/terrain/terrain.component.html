@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group">
                   <label for="surface">Surface:</label>
-                  <input type="text" class="form-control" id="surface" [(ngModel)]="newTerrain.surface" name="surface" required>
+                  <input type="number" class="form-control" id="surface" [(ngModel)]="newTerrain.surface" name="surface" required>
                 </div>
                 <div class="form-group">
                   <label for="description">Description:</label>
@@ -102,7 +102,7 @@
                   </select>
                 </div>
           
-                <div class="form-group">
+                <div class="form-group" *ngIf="authService.hasAdminRole();">
                   <label for="redevable">Redevable:</label>
                   <select class="form-control" id="redevable" [(ngModel)]="newTerrain.redevable" name="redevable" required>
                     <option *ngFor="let redevable of redevables" [ngValue]="redevable">{{ redevable.nom }} {{ redevable.prenom }}</option>
@@ -151,7 +151,7 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="updateRedevable">Update Redevable:</label>
+                  <label for="updateRedevable" >Update Redevable:</label>
                   <select class="form-control" id="updateRedevable" [(ngModel)]="updatingTerrain.redevable" name="updateRedevable" required>
                     <option *ngFor="let redevable of redevables" [ngValue]="redevable">{{ redevable.nom }} {{ redevable.prenom }}</option>
                   </select>

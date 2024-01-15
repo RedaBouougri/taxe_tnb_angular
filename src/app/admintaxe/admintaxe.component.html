@@ -1,0 +1,65 @@
+<div class="container mt-3 text-center">
+    <style>
+        .custom-title {
+            font-family: 'Arial', sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0015ff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            padding-top: 50px;
+        }
+    
+        .custom-body {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            color: #333; 
+            text-align: center;
+        }
+    
+        .professional-thead {
+            background-color: #006edd; 
+            border-bottom: 2px solid #dee2e6; 
+        }
+    
+        .professional-th {
+            padding: 15px; 
+            text-align: center;
+            background-color: #7883fc;
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: bold; 
+        }
+      </style>
+<h2 class="custom-title">Pending Taxes</h2>
+
+  <div class="custom-body">
+    <table class="table">
+      <thead class="professional-thead">
+        <tr>
+          <th scope="col" class="professional-th">Redevable</th>
+          <th scope="col" class="professional-th">Terrain</th>
+          <th scope="col" class="professional-th">Category</th>
+          <th scope="col" class="professional-th">Description</th>
+          <th scope="col" class="professional-th">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let taxe of taxes">
+          <td>{{ taxe.redevable.prenom }}</td>
+          <td>{{ taxe.terain?.nom }}</td>
+          <td>{{ taxe.category?.label }}</td>
+          <td>{{ taxe.description }}</td>
+          
+          <td>
+            <button class="btn btn-primary" (click)="accepterTaxe(taxe)">
+              <i class="fas fa-pencil"></i> Accept</button>
+            <button class="btn btn-danger"  ><i class="fas fa-trash"></i> Reject</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>

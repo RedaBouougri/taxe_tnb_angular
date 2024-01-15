@@ -38,12 +38,10 @@ export class LoginComponent {
       const { username, email, password,lastName,firstName,cin } = this.signUpForm.value;
       this.authService.signUp(username, email, password,lastName,firstName,cin).subscribe(
         (response) => {
-          // Handle successful sign-up
           console.log('Sign-up successful:', response);
           this.successRegistre=true;
         },
         (error) => {
-          // Handle sign-up error
           console.error('Sign-up error:', error);
         }
       );
@@ -66,7 +64,6 @@ export class LoginComponent {
         (error) => {
           console.error('Login error:', error);
           if (error.status === 401) {
-            // Set a flag to indicate login failure
             this.isValid = false;
           }
         }

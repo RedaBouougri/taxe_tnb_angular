@@ -15,6 +15,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CategoryComponent } from './category/category.component';
 import { RedevableComponent } from './redevable/redevable.component';
 import { TauxComponent } from './taux/taux.component';
+import { TaxeComponent } from './taxe/taxe.component';
+import { AdmintaxeComponent } from './admintaxe/admintaxe.component';
 
 
 
@@ -27,6 +29,8 @@ import { TauxComponent } from './taux/taux.component';
     CategoryComponent,
     RedevableComponent,
     TauxComponent,
+    TaxeComponent,
+    AdmintaxeComponent,
     
   ],
   imports: [
